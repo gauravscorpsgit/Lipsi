@@ -1,0 +1,54 @@
+<style xmlns="http://www.w3.org/1999/html">
+    .container {
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        transition: opacity  0.1s linear;
+        border-top: 0px;
+        padding: 20px;
+    }
+</style>
+<section id="about">
+    <div class="container">
+        <div class="row" align="center">
+            <md-card style="padding: 10px;">
+                <h3>LIPSI SOFTWARE ADMIN PANEL</h3>
+                <div ng-if="!fetching_complete" class="container" ng-class="visible">
+                    <md-progress-linear class="md-warn md-hue-3" md-mode="query"></md-progress-linear>
+                    <div class="bottom-block">
+                        <span><b>Fetching Details ...</b></span>
+                    </div>
+                </div>
+            </md-card>
+
+            <div ng-if="fetching_complete" class="col-md-12">
+                <div class="col-md-6" ng-repeat="user in users_arr">
+                    <md-card ng-if="user.name.length > 0">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span ng-if="user.name.length > 0" class="md-headline"><strong>Name : </strong>{{user.name}}</span>
+                                <span ng-if="user.email.length > 0" class="md-subhead"><strong>Email : </strong>{{user.email}}</span>
+                                <span class="md-subhead"><strong>Warned : </strong>{{user.warned}}</span>
+                                <span class="md-subhead"><strong>Warned Reason :</strong>{{warning_type[user.warned_reason]}}</span>
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <img ng-if="user.banned" ng-src="custom/flag_red.svg">
+                                    <span ng-if="user.banned"><strong>Banned</strong></span>
+                                    <img ng-if="!user.banned" ng-src="custom/flag_green.svg">
+                                    <span ng-if="!user.banned"><strong>Not Banned</strong></span>
+                                </div>
+                            </md-card-title-media>
+                        </md-card-title>
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button ng-if="!user.banned" class="md-raised md-warn" ng-click="updateBan(true, $index)">BAN</md-button>
+                            <md-button ng-if="user.banned" class="md-raised md-primary" ng-click="updateBan(false, $index)">REVOKE BAN</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
