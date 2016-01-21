@@ -22,6 +22,15 @@ angular.module('myApp.view1', ['ngRoute','firebase'])
             });
         };
 
+
+        $scope.updateWarn = function(flag, index){
+
+            list[index].warned = flag;
+            list.$save(index).then(function(ref) {
+                ref.key() === list[index].$id; // true
+            });
+        };
+
         ref.on("value", function(snapshot) {
             $scope.fetching_complete = true;
             var firebase_users  = snapshot.val();

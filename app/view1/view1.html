@@ -44,6 +44,8 @@
                         <md-card-actions layout="row" layout-align="end center">
                             <md-button ng-if="!user.banned" class="md-raised md-warn" ng-click="updateBan(true, $index)">BAN</md-button>
                             <md-button ng-if="user.banned" class="md-raised md-primary" ng-click="updateBan(false, $index)">REVOKE BAN</md-button>
+                            <md-button ng-if="!user.warned" class="md-raised md-warn" ng-click="updateWarn(true, $index)">WARN</md-button>
+                            <md-button ng-if="user.warned" class="md-raised md-primary" ng-click="updateWarn(false, $index)">REVOKE WARNING</md-button>
                         </md-card-actions>
                     </md-card>
                 </div>
